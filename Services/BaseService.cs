@@ -24,7 +24,6 @@ namespace Services
         {
             _db = db;
             _dbSet = _db.Set<TEntity>();
-
             _mapper = mapper;
         }
 

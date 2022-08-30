@@ -10,7 +10,7 @@ namespace Services.Abstract
 {
     public interface IUserService : IBaseService<UserDTO, User, UserDTO>
     {
-        public UserDTO Login(string ps, string us);
+        public UserDTO Login(UserDTO user);
 
         public List<UserContactsDTO> GetUserContacts();
     }

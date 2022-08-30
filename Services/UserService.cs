@@ -9,6 +9,7 @@ using DataAccess;
 using DTO;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Services.Helper;
 
 namespace Services
 {
@@ -29,23 +30,42 @@ namespace Services
             return dto;
         }
 
-        public UserDTO Login(string ps, string us)
+        public UserDTO Login(UserDTO model)
         {
            
-            var res = _db.Users.Where(x => x.Name == us && x.Password == ps);
+            var res = _db.Users.Where(x => x.Username == model.Username );
+
             if (res.Count() == 1)
             {
-                var dto  = _mapper.Map<User,UserDTO> (res.First());
-                return dto;
+                var user = res.FirstOrDefault();
+                var hash = Crypto.GenerateSHA256Hash(model.Password, user.Salt);
+
+                if (hash == user.PasswordHash)
+                {
+                    var dto = _mapper.Map<User, UserDTO>(res.First());
+                    return dto;
+                }
+                else
+				{
+                    throw new Exception("Wrong password!");
+				}
             }
             else
             {
-                throw new Exception("User tapilmadi");
+                throw new Exception("User not found");
             }
 
         }
 
-        public IEnumerable<UserRoleDTO> GetUserRoles()
+		public override UserDTO Create(UserDTO model)
+		{
+            model.Salt = Crypto.GenerateSalt();
+            model.PasswordHash = Crypto.GenerateSHA256Hash(model.Password, model.Salt);
+			
+            return base.Create(model);
+		}
+
+		public IEnumerable<UserRoleDTO> GetUserRoles()
         {
             var ent = _dbSet.Include(x => x.Roles);
 

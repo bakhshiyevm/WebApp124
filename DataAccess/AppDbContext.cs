@@ -1,4 +1,5 @@
 ﻿using DataAccess.Entities;
+using DataAccess.Helper;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,15 @@ namespace DataAccess
 
         public AppDbContext(DbContextOptions options) : base(options)
         {
-            
+
         }
 
-    }
+		//protected override void OnModelCreating(ModelBuilder modelBuilder)
+		//{
+
+  //          //testing load data from another class
+  //          //InitialData.LoadInitialData(ref modelBuilder);
+		//	base.OnModelCreating(modelBuilder);
+		//}
+	}
 }

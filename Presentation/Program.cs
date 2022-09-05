@@ -3,6 +3,7 @@ using AutoMapper;
 using DataAccess;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using Services;
 using Services.Abstract;
 using Services.Config;
@@ -11,6 +12,14 @@ using Services.Helper;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddDbContext<AppDbContext>(opt =>
+			opt.UseSqlite(builder.Configuration.GetConnectionString("Default"),
+			x => x.MigrationsAssembly("DataAccess")
+		  )
+	  );
+
+
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDistributedMemoryCache();
@@ -21,11 +30,13 @@ builder.Services.AddSession();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 	.AddCookie(opt =>
 	{
+		opt.LoginPath = "/SignIn";
 		opt.Cookie.HttpOnly = true;
 		opt.Cookie.Name = "AuthCookie";
 		opt.Cookie.MaxAge = TimeSpan.FromSeconds(300);
+
 		//opt.Events = new CookieAuthenticationEvents
-		//{
+		//{		
 		//	OnRedirectToLogin = x =>
 		//	{
 		//		x.HttpContext.Response.StatusCode = 401;
@@ -35,11 +46,6 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 	});
 
 
-builder.Services.AddDbContext<AppDbContext>(opt =>
-			opt.UseSqlite(
-			builder.Configuration.GetConnectionString("Default")
-		  ) 
-	  );
 builder.Services.AddScoped<IUserService,UserService>();
 
 var mapperConfig = new MapperConfiguration( mc=>
@@ -66,14 +72,12 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+
+app.MapGet("TEST", X => X.Response.WriteAsync("tEST"));
+
 app.MapControllerRoute(
 	name: "default",
-	pattern: "{controller=Login}/{action=SignIn}/{id?}"
+	pattern: "{controller=Login}/{action=SignIn}"
 	);
-app.MapControllerRoute(
-	name: "SignIn",
-	pattern: "{controller=Login}/{action=SignIn}");
-
-
 
 app.Run();

@@ -37,6 +37,13 @@ namespace Services.Config
             CreateMap<UserRoles, UserRoleDTO>()
                  .ForMember(m => m.UserName, opt => opt.MapFrom(src => src.User.Name))
                  .ForMember(m => m.RoleName, opt => opt.MapFrom(src => src.Role.Name));
+
+            CreateMap<User, UserRoleDTO>()
+         .ForMember(m => m.UserName, opt => opt.MapFrom(src => src.Name))
+         .ForMember(m => m.RoleName, opt => opt.MapFrom(src => src.Roles.First().Name))
+         .ForMember(m => m.UserId, opt => opt.MapFrom(src => src.Id))
+         .ForMember(m => m.RoleId, opt => opt.MapFrom(src => src.Roles.First().Id));
+
         }
     }
 }

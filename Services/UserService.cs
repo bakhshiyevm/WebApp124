@@ -73,5 +73,14 @@ namespace Services
 
             return res;
         }
+
+        public IEnumerable<UserRoleDTO> GetUserRoles(UserDTO user)
+        {
+            var ent = _dbSet.Include(x => x.Roles).Where(x=>x.Id==user.Id).First();
+
+            var res = _mapper.Map<IEnumerable<UserRoleDTO>>(ent);
+
+            return res;
+        }
     }
 }

@@ -16,16 +16,19 @@ namespace DataAccess
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRoles> UserRoles { get; set; }
 
-        public AppDbContext(DbContextOptions options) : base(options)
-        {
 
-        }
+
+		public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+		{
+
+		}
+
 
 		//protected override void OnModelCreating(ModelBuilder modelBuilder)
 		//{
 
-  //          //testing load data from another class
-  //          //InitialData.LoadInitialData(ref modelBuilder);
+		//          //testing load data from another class
+		//          //InitialData.LoadInitialData(ref modelBuilder);
 		//	base.OnModelCreating(modelBuilder);
 		//}
 	}

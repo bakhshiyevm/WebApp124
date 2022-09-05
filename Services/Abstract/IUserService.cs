@@ -13,5 +13,8 @@ namespace Services.Abstract
         public UserDTO Login(UserDTO user);
 
         public List<UserContactsDTO> GetUserContacts();
+
+        public IEnumerable<UserRoleDTO> GetUserRoles();
+        public IEnumerable<UserRoleDTO> GetUserRoles(UserDTO user);
     }
 }

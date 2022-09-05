@@ -1,5 +1,4 @@
 ﻿@using DTO
-@model UserDTO
 @{
     Layout = "_LoginLayout";
 }
@@ -8,11 +7,19 @@
                 <div class="card shadow-2-strong" style="border-radius: 1rem;">
                     <div class="card-body p-5 text-center">
                         <form method="post">
-                            <h3 class="mb-5">Sign In</h3>
+                            <h3 class="mb-5">Sign Up</h3>
 
 
                             <div class="form-outline mb-4">
                                 <input type="text" placeholder="Username" class="form-control form-control-lg" name="Username" />
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <input type="text" placeholder="Name" class="form-control form-control-lg" name="Name" />
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <input type="text" placeholder="Surname" class="form-control form-control-lg" name="Surname" />
                             </div>
 
                             <div class="form-outline mb-4">
@@ -21,16 +28,16 @@
 
 
                             <button class="btn btn-primary btn-lg btn-block mb-4" type="submit"
-                                    asp-controller="Login"   asp-action="SignIn">
-                                Login
+                                    asp-controller="Login" asp-action="SignUp">
+                                Sign Up
                             </button>
 
 @*
                             <partial name="~/Views/Shared/Message.cshtml" />
 *@
                             <div class="form-outline mb-4">
-                                Don't have account? <a class="form-label" asp-controller="Login"
-                                                       asp-action="SignUp">Sign Up</a>
+                                Have an account? <a class="form-label" asp-controller="Login"
+                                                       asp-action="SignIn">Sign In</a>
                             </div>
                         </form>
                     </div>

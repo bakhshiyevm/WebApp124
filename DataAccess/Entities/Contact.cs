@@ -10,7 +10,6 @@ namespace DataAccess.Entities
 {
     public class Contact : BaseEntity
     {
-        [Required]
         public string Phone { get; set; }
         public string Adress { get; set; }
         public string Email { get; set; }

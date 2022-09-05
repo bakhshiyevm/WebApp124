@@ -16,3 +16,11 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.bg-img {
+    background-image: url("https://i0.wp.com/cdn.clickwallpapers.net/images/clickwallpapers-cinema-inside-3840x2160-img1.jpg?w=958&ssl=1");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    background-color: #070a1b;
+}

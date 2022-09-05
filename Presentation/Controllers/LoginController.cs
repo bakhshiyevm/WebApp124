@@ -31,8 +31,9 @@ namespace Presentation.Controllers
 			{
 				var res = _userService.Login(user);
 
-				Authenticate(user);
-				return View(res);
+				//var roles = _userService.GetUserRoles(res);
+				Authenticate(res,null);
+				return RedirectToAction( "Home","Main");
 			}
 			catch (Exception e)
 			{
@@ -42,16 +43,25 @@ namespace Presentation.Controllers
 		}
 
 
-		private  void  Authenticate(UserDTO user)
+		private  void  Authenticate(UserDTO user, IEnumerable<UserRoleDTO> userRole)
 		{
 			var claims = new List<Claim>
 			{
 				new Claim("Id", user.Id.ToString()),
 				new Claim("Username", user.Username),
-				new Claim("Name", user.Name),
-				new Claim("Surname", user.Surname),
-				//new Claim( ClaimTypes.MobilePhone, user.Surname)
+				new Claim(ClaimTypes.Name, user.Name),
+				new Claim(ClaimTypes.Surname, user.Surname),
+
 			};
+
+   //         foreach (var item in userRole)
+   //         {
+
+			//	claims.Add(
+			//		new Claim(ClaimTypes.Role, item.RoleName)
+			//				);
+			//}
+
 
 			ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie");
 			
@@ -64,6 +74,7 @@ namespace Presentation.Controllers
 		{
 			return View();
 		}
+
 
 		[HttpPost]
 		[Route("SignUp")]

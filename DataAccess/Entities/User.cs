@@ -10,8 +10,7 @@ namespace DataAccess.Entities
         public string Username { get; set; }
         public string Salt { get; set; }
         public string PasswordHash { get; set; }
-
-        public List<Contact> Contacts { get; set; }
+        public Contact Contacts { get; set; }
         public List<Role> Roles { get; set; }
 
     }

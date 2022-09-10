@@ -47,6 +47,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 
 builder.Services.AddScoped<IUserService,UserService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var mapperConfig = new MapperConfiguration( mc=>
 	mc.AddProfile(new MapperProfile())	
@@ -72,12 +73,9 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-
-app.MapGet("TEST", X => X.Response.WriteAsync("tEST"));
-
 app.MapControllerRoute(
 	name: "default",
-	pattern: "{controller=Login}/{action=SignIn}"
+	pattern: "{controller=Main}/{action=Home}"
 	);
 
 app.Run();

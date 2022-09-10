@@ -15,6 +15,7 @@ namespace Services.Abstract
     {
         public TRes Get(int id);
         public IEnumerable<TRes> Get();
+        public IEnumerable<TRes> Get(int page, int pageSize);
         public TRes Create(TReq user);
         public TRes Update(TReq user);
         public void Delete(int id);

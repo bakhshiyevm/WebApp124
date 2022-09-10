@@ -4,10 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers
 {
-    //[Authorize]
+	//[Authorize]
+	[Route("")]
+	[Route("Main")]
 	public class MainController : Controller
 	{
 		[HttpGet]
+		[Route("")]
 		[Route("Home")]
 		public ActionResult Home()
 		{
@@ -18,6 +21,5 @@ namespace Presentation.Controllers
 
 			return View();
 		}
-
 	}
 }

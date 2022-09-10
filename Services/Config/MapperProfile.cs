@@ -25,6 +25,10 @@ namespace Services.Config
 
             CreateMap<Contact, ContactDTO>();
 
+            CreateMap<ProductDTO, Product>();
+
+            CreateMap<Product, ProductDTO>();
+
 
             CreateMap<RoleDTO, Role>();
 

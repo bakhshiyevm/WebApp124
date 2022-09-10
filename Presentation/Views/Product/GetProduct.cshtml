@@ -1,0 +1,19 @@
+﻿@model ProductDTO
+@{
+}
+
+
+<div class="row mt-1 mb-2">
+            
+            <div class="col-4 my-4" >
+                <div class="card card-size-250">
+                <img class="card-img-top " src=@Url.Content(Model.ImgPath) alt="Card image"> <!--card-img-size-50-->
+                <div class="card-body">
+                    <h4 class="card-title">@Model.Name</h4>
+                    <p class="card-text">Marvel movie</p>
+                    <p class="card-text">Price : @Model.Price</p>
+                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                </div>
+                </div>
+            </div>
+</div>

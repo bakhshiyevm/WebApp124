@@ -69,6 +69,14 @@ namespace Presentation.Controllers
 		}
 
 		[HttpGet]
+		[Route("SignOut")]
+		public IActionResult SignOut()
+		{
+			HttpContext.SignOutAsync();
+			return RedirectToAction("SignIn");
+		}
+
+		[HttpGet]
 		[Route("SignUp")]
 		public IActionResult SignUp()
 		{
@@ -82,7 +90,7 @@ namespace Presentation.Controllers
 		{
 
 			var x = Convert.ToInt32(HttpContext.User?.FindFirst(x => x.Type == "Id")?.Value);
-
+			
 			var res = _userService.Create(user);
 			return View(res);
 		}

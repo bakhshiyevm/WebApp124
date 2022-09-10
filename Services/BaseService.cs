@@ -62,6 +62,15 @@ namespace Services
             return res;
         }
 
+
+        public virtual IEnumerable<TRes> Get(int page, int pageSize)
+        {
+            var ents = _dbSet.Skip((page-1)*pageSize).Take(pageSize).ToList();
+
+            var res = _mapper.Map<IEnumerable<TEntity>, IEnumerable<TRes>>(ents);
+            return res;
+        }
+
         public virtual TRes Update(TReq model)
         {
             var ent = _mapper.Map<TReq, TEntity>(model);

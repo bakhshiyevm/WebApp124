@@ -1,0 +1,77 @@
+﻿@model PagedResponseDTO<ProductDTO>
+
+    <div class="row justify-content-md-center">
+        <div class="col col-md-auto">
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item list-group-item-secondary mx-auto"><a asp-action="Products" asp-route-sortOrder="@ViewBag.NameSort">Name</a></li>
+                <li class="list-group-item list-group-item-secondary"><a asp-action="Products" asp-route-sortOrder="@ViewBag.PriceSort">Price</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+    <form method="get">
+        <div class="form-inline form-group">
+            <label class="control-label">SearchBox: </label>
+            <input name="SearchName" class="form-control width-300"  />
+
+            <input type="submit" value="Filter" class="btn btn-default" />
+        </div>
+    </form>
+      </div>
+<div class="row mt-1 mb-2">
+
+@{
+    foreach (var item in Model.Values)
+    {
+            
+            <div class="col-4 my-4" >
+            <a asp-controller="Product" asp-action="GetProduct" asp-route-id=@item.Id>
+                <div class="card card-size-250">
+                <img class="card-img-top " src=@Url.Content(@item.ImgPath) alt="Card image"> <!--card-img-size-50-->
+                <div class="card-body">
+                    <h4 class="card-title">@item.Name</h4>
+                    <p class="card-text">Marvel movie</p>
+                    <p class="card-text">Price : @item.Price</p>
+                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                </div>
+                </div>
+            </a>
+            </div>
+    }
+
+            <ul class="pagination">
+            @if(ViewBag.HasPrevious)
+            {
+                <li class="page-item"><a class="page-link"  asp-action="Products" asp-route-page="@(Model.Page-1)">Previous</a></li>
+            }
+            else
+            {
+                <li class="page-item disabled"><a class="page-link">Previous</a></li>
+            }
+            @if (ViewBag.HasNext)
+            {
+                <li class="page-item"><a class="page-link" asp-action="Products" asp-route-page="@(Model.Page+1)">Next</a></li>
+            }
+            else
+            {
+                <li class="page-item disabled"><a class="page-link">Next</a></li>                
+            }
+        </ul>
+
+        <!--   
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown button
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">10</a>
+                    <a class="dropdown-item" href="#">25</a>
+                    <a class="dropdown-item" href="#">50</a>
+                </div>
+
+            </div>
+            -->
+}
+
+</div>
